@@ -165,6 +165,25 @@ Resources:
             backend:
           EOF
 
+          mkdir -p ~/alertmanager
+          cd ~/alertmanager
+          touch alertmanager.yml
+
+          cat << 'EOF' > alertmanager.yml
+
+          route:
+            receiver: 'mail'
+
+          receivers:
+            - name: 'mail'
+              email_configs:
+               - smarthost: 'smtp.gmail.com:587'
+                 from: 'your_mail@gmail.com'
+                 to: 'some_mail@gmail.com'
+                 auth_username: '...'
+                 auth_password: '...'
+          EOF
+          
           mkdir -p ~/prometheus
           cd ~/prometheus
           touch alert.yml prometheus.yml
